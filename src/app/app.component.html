@@ -1,0 +1,126 @@
+<div class="wrapper">
+
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="" class="navbar-brand"><b>Stack </b>Exchange</a>
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button> -->
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div> -->
+        <!-- /.navbar-collapse -->
+
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Search
+          <!-- <small>Example 2.0</small> -->
+        </h1>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Search a text by using StackExchange APIs..</h3>
+              </div><!-- /.box-header -->
+              
+              <!-- form start -->
+              <form role="form" #searchFrm = "ngForm" (ngSubmit)="searchFrm.form.valid && searchSubmitFn(searchFrm.value, 1, 25);" novalidate>
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="intitle">Title</label>
+                    <input type="text" class="form-control" name="intitle" id="intitle" placeholder="Enter text" ngModel required >
+                  </div>
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary btn-flat" [disabled]="searchFrm.invalid">Search</button>
+                  <button type="reset" class="btn btn-default btn-flat">Reset</button>
+                </div>
+              </form>
+            </div><!-- /.box -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">
+                    &nbsp;Total:&nbsp;&nbsp;<span class="badge bg-navy">{{ totalCount }}</span>
+                  </h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <!-- <pre>{{ stackList | json }} </pre> -->
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Score</th>
+                          <th>No. of Views</th>
+                          <th>No. of Answer</th>
+                          <th>Tags</th>
+                          <th>Question</th>
+                          <th>Accepted Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let i of stackList; let inx = index;">
+                      <tr>
+                        <td>{{ (pageSize * (page -1)) + (inx + 1) }}</td>
+                        <td class="text-right">{{ i.score }}</td>
+                        <td class="text-right">{{ i.view_count }}</td>
+                        <td class="text-right">{{ i.answer_count }}</td>
+                        <td>{{ i.tags }}</td>
+                        <td><a href="{{ i.link }}" target="_blank" [innerHTML]="toHTML(i.title)"></a></td>
+                        <!-- <td nowrap><a *ngIf="i.is_answered" (click) = "showAnswerFn(i.accepted_answer_id, i.question_id, i.link)" target="_blank" style="cursor: pointer;">Show Answer</a></td> -->
+                        <td nowrap><a *ngIf="i.is_answered && i.accepted_answer_id" href="{{ i.link }}/{{ i.accepted_answer_id }}#{{i.accepted_answer_id}}" target="_blank">Show Answer</a></td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="stackList && stackList.length == 0">
+                        <tr>
+                            <td class="noDataFound" colspan="8" style="vertical-align: middle; color: #333;">No Data Found !!</td>
+                        </tr>
+                    </tbody>
+                    <!-- <tbody *ngIf="!stackList">
+                        <tr>
+                            <td class="noDataFound" colspan="8" style="vertical-align: middle; color: #333; font-weight:500">Loading...</td>
+                        </tr>
+                    </tbody> -->
+                </table>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer clearfix">
+                  <pagination [totalItems]="totalCount" [(ngModel)]="page" [itemsPerPage]="pageSize" [maxSize]="5"  [rotate]="rotate" (pageChanged)="pageChanged($event)" [boundaryLinks]="true"  [disabled]="disabled" class="pagination pagination-sm no-margin pull-right"></pagination>
+              </div>
+            </div>
+            <!-- /.box -->
+          </div>
+        </div>
+      </section>
+      <!-- /.content -->
+
+    </div><!-- /.container -->
+  </div><!-- /.content-wrapper -->
+  
+</div><!-- ./wrapper -->
+
+

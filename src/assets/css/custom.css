@@ -1,0 +1,108 @@
+
+.login-background {
+  background: url('../img/login/background.png') repeat; 
+ }
+
+.login-center-image
+{
+	margin: 0 auto;
+}
+
+.error
+{
+	color: #E74C3C;
+}
+
+.top{
+    top: 5px;
+}
+
+.requiredError {
+	color: #dd4b39;
+	font-weight: bold;
+}
+.done {
+	color: #00a65a;
+}
+
+/*ui bootstrap popOver display properly */
+.popover-content {
+    word-wrap: break-word;
+}
+
+.noDataFound {
+    color: #333;
+    font-weight: bold;
+    background-color: #efefef;
+    text-align: center;
+    height: 75px;
+    font-size: 17px;
+}
+
+/* resolve issue of search placeholder in select 2 multiple */
+/*.ui-select-multiple input.ui-select-search {
+    width: auto !important;
+}*/
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+    cursor: pointer;
+}
+
+/* table ni upar nu name(total) small display mate */
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title{
+    font-size: 13px;
+}
+
+/* table ma dark line na ave etle */
+.table > tbody + tbody {
+    border-top: none;
+}
+
+/* Check box */
+.activeStatus {
+    border: 1px solid #d2d6de;
+    border-radius: 0;
+    background-color: #fff;
+    color: #333;
+    height: 25px;
+    width: 25px;
+}
+
+.activeStatus.checked {
+    border: 1px solid #146da0;
+    background-color: #2489C5;
+    color: #fff;
+}
+
+.PrintHeader {
+    display: none;
+}
+
+
+/* for print page */
+@media print {
+
+    * {
+        font-size: 12px;
+    }
+
+    .page-break {
+        display: block;
+        page-break-after: always;
+        margin-bottom: 0px;
+    }
+
+    #pageFooter {
+        display: table-footer-group;
+    }
+
+    #pageFooter:after {
+        counter-increment: page;
+        content: counter(page);
+    }
+
+    .PrintHeader {
+        display: block;
+    }
+}
